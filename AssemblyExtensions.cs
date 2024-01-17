@@ -1,11 +1,11 @@
 ﻿using System.Text;
 
-namespace CommonHelpers.Assembly
+namespace CommonExtensions
 {
     /// <summary>
     /// Helpers to work with assemblies 
     /// </summary>
-    public static class AssemblyUtils
+    public static class AssemblyExtensions
     {
         /// <summary>
         /// Gets the file content from assembly.

@@ -1,9 +1,9 @@
-﻿namespace CommonHelpers.Collections
+﻿namespace CommonExtensions
 {
     /// <summary>
     /// The extended methods for collections
     /// </summary>
-    public static class CollectionCoreExtensions
+    public static class CollectionExtensions
     {
         /// <summary>
         /// Put collection into dictionary by collection item key selector
@@ -145,7 +145,7 @@
         /// <returns>The value from the collection by key if exists or null</returns>
         public static TValue GetOrNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) where TValue : class
         {
-            return GetOrDefault(dictionary, key);
+            return dictionary.GetOrDefault(key);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@
             // for each key value pair 
             foreach (var kv in other)
             {
-                Put(dictionary, kv.Key, kv.Value);
+                dictionary.Put(kv.Key, kv.Value);
             }
         }
 
@@ -249,7 +249,7 @@
             // if collection exists add and finish
             if (dictionary.TryGetValue(key, out var collection))
             {
-                Put(collection, sec, value);
+                collection.Put(sec, value);
                 return;
             }
 
@@ -272,7 +272,7 @@
             // if collection exists add and finish
             if (dictionary.TryGetValue(key, out var collection))
             {
-                AddValue(collection, sec, value);
+                collection.AddValue(sec, value);
                 return;
             }
 
@@ -326,7 +326,7 @@
         /// <param name="values">The values</param>
         public static void AddValues<TKey, TValue>(this IDictionary<TKey, IList<TValue>> dictionary, TKey key, IEnumerable<TValue> values)
         {
-            values.Each(value => AddValue(dictionary, key, value));
+            values.Each(value => dictionary.AddValue(key, value));
         }
 
         /// <summary>
@@ -338,7 +338,7 @@
         /// <param name="other"></param>
         public static void AddValues<TKey, TValue>(this IDictionary<TKey, IList<TValue>> dictionary, IDictionary<TKey, IList<TValue>> other)
         {
-            other.Each(kv => AddValues(dictionary, kv.Key, kv.Value));
+            other.Each(kv => dictionary.AddValues(kv.Key, kv.Value));
         }
 
         /// <summary>
