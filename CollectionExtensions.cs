@@ -446,6 +446,11 @@
                 return true;
             }
 
+            if (collection.TryCast<ICollection<TValue>>(out var coll))
+            {
+                return coll.Count == 0;
+            }
+
             return !collection.Any();
         }
 
